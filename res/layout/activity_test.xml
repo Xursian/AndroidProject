@@ -103,7 +103,7 @@
         android:layout_above="@+id/txtErrs"
         android:layout_alignTop="@+id/btnSaveDetails"
         android:layout_toRightOf="@+id/textView5"
-        android:text="Compare Friend" />
+        android:text="Friends Match" />
 
     <Button
         android:id="@+id/btnSaveDetails"

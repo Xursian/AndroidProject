@@ -50,26 +50,27 @@ public class LoginActivity extends Activity {
 		//hide a button if not needed
 		if (mAction.equals("login")) {
 			btnSignup.setVisibility(View.GONE);
+			
+			//we want to try to load saved data (if the checkbox is clicked)		
+			try {
+				Log.d("TEST","Attempt Load SP");
+				SharedPreferences sp = getSharedPreferences("loginInfo", MODE_PRIVATE); //SP name is loginInfo
+				//get value of the checkbox
+				chkbxSaveLogInInfo.setChecked(sp.getBoolean("saveLoginInfo", false));
+				//now if checkbox is true we want to load the name and pass,
+				Log.d("TEST","Value of CHkBx=" + String.valueOf(chkbxSaveLogInInfo.isChecked()));
+				if (chkbxSaveLogInInfo.isChecked()) {
+					txtUsername.setText(sp.getString("userName", ""));
+					txtPassword.setText(sp.getString("userPass", ""));
+					Log.d("TEST","Loaded SP");
+				}
+			} catch (Exception ex){
+				chkbxSaveLogInInfo.setChecked(false);
+				Log.d("TEST","ERROR LOADING SP");
+			}
 		} else {
 			btnLogin.setVisibility(View.GONE);
-		}
-		
-		//we want to try to load saved data (if the checkbox is clicked)		
-		try {
-			Log.d("TEST","Attempt Load SP");
-			SharedPreferences sp = getSharedPreferences("loginInfo", MODE_PRIVATE); //SP name is loginInfo
-			//get value of the checkbox
-			chkbxSaveLogInInfo.setChecked(sp.getBoolean("saveLoginInfo", false));
-			//now if checkbox is true we want to load the name and pass,
-			Log.d("TEST","Value of CHkBx=" + String.valueOf(chkbxSaveLogInInfo.isChecked()));
-			if (chkbxSaveLogInInfo.isChecked()) {
-				txtUsername.setText(sp.getString("userName", ""));
-				txtPassword.setText(sp.getString("userPass", ""));
-				Log.d("TEST","Loaded SP");
-			}
-		} catch (Exception ex){
-			chkbxSaveLogInInfo.setChecked(false);
-			Log.d("TEST","ERROR LOADING SP");
+			//the register doesn't need to load details its a new account
 		}
 		
 		//signup button
@@ -165,6 +166,7 @@ public class LoginActivity extends Activity {
 						editor.putString("userPass", "");
 						editor.putBoolean("saveLoginInfo", chkbxSaveLogInInfo.isChecked());
 					}
+					editor.commit();
 				} catch (Exception ex) {
 					
 				}
