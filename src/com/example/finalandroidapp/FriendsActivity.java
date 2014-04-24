@@ -1,13 +1,17 @@
 package com.example.finalandroidapp;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -49,7 +53,7 @@ public class FriendsActivity extends Activity {
 				//search the database for a match
 				final String userNameToSearchFor = txtUserName.getText().toString();
 				
-				ParseQuery<ParseObject> qry = ParseQuery.getQuery("User");
+			/*	ParseQuery<ParseObject> qry = ParseQuery.getQuery("User");
 				qry.whereEqualTo("username", userNameToSearchFor);
 				qry.getFirstInBackground(new GetCallback<ParseObject>() {
 
@@ -64,8 +68,22 @@ public class FriendsActivity extends Activity {
 						txtDetails.setText("\nMatching Table: User: for username: " + userNameToSearchFor);
 					}
 					
-				});
-			}
+				});*/
+				
+				ParseQuery<ParseObject> qry = ParseQuery.getQuery("User"); //table name
+				qry.whereEqualTo("username", userNameToSearchFor);
+				qry.getFirstInBackground(new GetCallback<ParseObject>() {  //and ONLY one row
+
+					@Override
+					public void done(ParseObject arg0, ParseException arg1) {
+						//if good then populate fields
+						if (arg0 != null) {
+							txtDetails.setText("Users Object ID = " + arg0.getString("objectId"));
+						} else {
+							txtDetails.setText("No such user found");
+						}
+					}
+				});			}
 		});
 		
 	}
