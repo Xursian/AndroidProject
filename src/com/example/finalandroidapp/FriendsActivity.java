@@ -1,6 +1,9 @@
 package com.example.finalandroidapp;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -24,6 +27,9 @@ import com.parse.ParseUser;
 public class FriendsActivity extends Activity {
 	
 	//public String userNames[] = {"test1","test2","test3"};
+	//a test of comparing matchs
+	public String test1 = "Rice, Bacon, Cheeze, toast";
+	public String test2 = "bacon, lettus, hotdogs, rice";
 	
 	TextView txtUserName, txtDetails;
 	Button btnSearchUser;
@@ -69,11 +75,38 @@ public class FriendsActivity extends Activity {
 			    }
 			  }
 			});
-						
+			
+			//tests
+			displayWhatsInCommon(test1, test2);
 		}
 		});
 		
 	}
+	
+	//based on comma dilimed info, a generic quick match of common enteries found
+	public void displayWhatsInCommon (String firstPerson, String secondPerson) {
+		Log.d("TEST","INSIDE PROC");
+		//split the string into arrays, based on "," after remove spaces from the string // lower case to hit more matchs
+		List<String> listOne = Arrays.asList(firstPerson.replace(" ", "").toLowerCase(Locale.ENGLISH).split(","));
+		List<String> listTwo = Arrays.asList(secondPerson.replace(" ", "").toLowerCase(Locale.ENGLISH).split(","));
+		String matches = "";
+		Log.d("TEST","HAVE CONVERTED LISTS");
+		
+		//find the matches
+		HashSet<String> map = new HashSet<String>();
+		for (String one : listOne) {
+			map.add(one);
+		}
+		Log.d("TEST","POPULATED MAP");
+		for (String two : listTwo) {
+			if (map.contains(two)) {
+				matches += two + ", ";
+			}
+		}
+		
+		txtDetails.setText("The Matches Are: " + matches);
+	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
