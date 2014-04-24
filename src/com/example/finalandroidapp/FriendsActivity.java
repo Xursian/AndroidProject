@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
-import com.parse.Parse;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -103,7 +103,8 @@ public class FriendsActivity extends Activity {
 			//tests
 			//displayWhatsInCommon(test1, test2);
 			//here we want to match results from user and searchedUser
-			// for each of their categories and append it to the list			
+			// for each of their categories and append it to the list	
+			/*
 			ParseQuery<ParseObject> user1Qry = ParseQuery.getQuery("Details");
 			user1Qry.whereEqualTo("owner", ParseUser.getCurrentUser());
 			user1Qry.addDescendingOrder("updatedAt");
@@ -127,10 +128,29 @@ public class FriendsActivity extends Activity {
 					Log.d("COUNT?",String.valueOf(arg0.size()));
 				}
 			});
-			/*	
+			*/
+		/*		
+			ParseQuery<ParseObject> query = ParseQuery.getQuery("Details");
+			query.getInBackground(mstrFriendsId, new GetCallback<ParseObject>() {
+			  public void done(ParseObject object, ParseException e) {
+			    if (e == null) {
+			    	user2Movies = object.getString("movies");
+					user2Games = object.getString("games");
+					user2Songs = object.getString("songs");
+					user2Activities = object.getString("activities");
+					Log.d("VALUE",user2Movies);
+			    } else {
+			    	Log.d("Error",e.getMessage());
+			    }
+			  }
+			});
+			
+			*/
+			
+			ParseObject obj = ParseObject.createWithoutData("User",mstrFriendsId);
 			//here we want to grab the searched users values now
 			ParseQuery<ParseObject> user2Qry = ParseQuery.getQuery("Details");
-			user2Qry.whereEqualTo("owner", mstrFriendsId);
+			user2Qry.whereEqualTo("owner", obj);
 			user2Qry.addDescendingOrder("updatedAt");
 			user2Qry.setLimit(1);
 			user2Qry.findInBackground(new FindCallback<ParseObject>() {				
@@ -144,13 +164,15 @@ public class FriendsActivity extends Activity {
 							user2Games = detail.getString("games");
 							user2Songs = detail.getString("songs");
 							user2Activities = detail.getString("activities");
+							Log.d("VALUE",user2Movies);
 						}
 					} else {
 						Log.d("Error",arg1.getMessage());
 					}
 				}
 			});
-			
+		
+			/*
 			//run the match and show the results
 			txtDetails.setText(""); //resets
 			txtDetails.setText("Matches: ");

@@ -103,7 +103,7 @@ public class TestActivity extends Activity {
 				} else {
 					Log.d("Error",arg1.getMessage());
 				}
-			//	txtErr.setText(arg0(0).getString("games"));
+			Log.d("ParseUser=",String.valueOf(ParseUser.getCurrentUser()));
 			}
 		});
 			
