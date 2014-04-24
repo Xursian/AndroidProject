@@ -1,7 +1,9 @@
 package com.example.finalandroidapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,7 +30,7 @@ public class TestActivity extends Activity {
 		setContentView(R.layout.activity_test);
 		
 		//grab the current user
-		ParseUser currentUser = ParseUser.getCurrentUser();
+		final ParseUser currentUser = ParseUser.getCurrentUser();
 		//convert user to string
 		String strUser = currentUser.getUsername().toString();
 		
@@ -44,24 +46,28 @@ public class TestActivity extends Activity {
 		txtActivities = (TextView)findViewById(R.id.txtActivities);
 
 		
-		//we want to try to load details of the users current stuff if it exists
 		ParseQuery<ParseObject> qry = ParseQuery.getQuery("Details"); //table name
-		qry.whereEqualTo("owner", ParseUser.getCurrentUser()).orderByAscending("updatedAt"); //column owner and most recent
-		qry.getFirstInBackground(new GetCallback<ParseObject>() {
+		qry.include(currentUser.getObjectId()); //VERY IMPORTANT!!!! includes current users accociated rows
+		qry.orderByAscending("updatedAt"); //make sure we get the most up to date row
+		qry.getFirstInBackground(new GetCallback<ParseObject>() {  //and ONLY one row
 
 			@Override
 			public void done(ParseObject arg0, ParseException arg1) {
 				//if good then populate fields
-				if (arg0 != null) {
+				if (arg1 == null) {
 					txtMovies.setText(arg0.getString("movies"));
 					txtGames.setText(arg0.getString("games"));
 					txtSongs.setText(arg0.getString("songs"));
 					txtActivities.setText(arg0.getString("activities"));
+				//	Toast.makeText(TestActivity.this, "Loading Sucessfull!" + arg0.getString("movies").length(), Toast.LENGTH_SHORT).show();
+					Log.d("TEST","LOADING DETAILS UN=: " + currentUser.getObjectId());
+				} else {
+				//	Toast.makeText(TestActivity.this, "Sorry loading detailes failed!", Toast.LENGTH_SHORT).show();
+					Log.d("TEST","ERROR LOADING DETAILS: " + arg1.toString() + currentUser.getObjectId().toString());
 				}
 			}
-			
 		});
-		
+			
 		
 		Button btnSaveDetails = (Button)findViewById(R.id.btnSaveDetails);
 		btnSaveDetails.setOnClickListener(new OnClickListener() {
@@ -100,6 +106,16 @@ public class TestActivity extends Activity {
 						}
 					});
 				}
+			}
+		});
+		
+		//shoot on over to the compare activity
+		Button btnCompareFriends = (Button)findViewById(R.id.btnCompareFriend);
+		btnCompareFriends.setOnClickListener(new OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(TestActivity.this, FriendsActivity.class);
+				startActivity(i);				
 			}
 		});
 	}

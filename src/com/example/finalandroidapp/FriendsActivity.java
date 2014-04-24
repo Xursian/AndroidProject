@@ -1,15 +1,30 @@
 package com.example.finalandroidapp;
 
-import android.os.Bundle;
+import java.util.ArrayList;
+
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
+import android.widget.ListView;
 
 public class FriendsActivity extends Activity {
+	
+	//public String userNames[] = {"test1","test2","test3"};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_friends);
+		
+		//final ListView listview = (ListView)findViewById(R.id.listview);
+		//setListAdapter(new ArrayAdapter<String>(FriendsActivity.this, R.layout.listview_layout, userNames));
+		//final ArrayList<String> list = new ArrayList<String>();
+		//for (int i=0; i < userNames.length; i++) {
+		//	list.add(userNames[i]);
+		//}
+
+		
+		
 	}
 
 	@Override
