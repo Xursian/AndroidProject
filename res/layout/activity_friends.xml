@@ -19,13 +19,13 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/btnMatchFriendsCommon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
-        android:text="See In Commen!" />
+        android:text="See In Common!" />
 
     <EditText
         android:id="@+id/txtFindFriendUserName"
@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/txtFindFriendUserName"
-        android:layout_below="@+id/button1"
+        android:layout_below="@+id/btnMatchFriendsCommon"
         android:ems="10"
         android:lines="6"
         android:inputType="textMultiLine" />

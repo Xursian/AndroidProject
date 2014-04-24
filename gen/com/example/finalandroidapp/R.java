@@ -30,10 +30,10 @@ public final class R {
         public static final int btnCompareFriend=0x7f08000d;
         public static final int btnLogInMain=0x7f080005;
         public static final int btnLogin=0x7f080017;
+        public static final int btnMatchFriendsCommon=0x7f080001;
         public static final int btnRegister=0x7f080018;
         public static final int btnRegisterMain=0x7f080004;
         public static final int btnSaveDetails=0x7f080008;
-        public static final int button1=0x7f080001;
         public static final int chxbxRememberMe=0x7f080019;
         public static final int password=0x7f080015;
         public static final int textView1=0x7f080000;
