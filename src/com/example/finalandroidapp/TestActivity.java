@@ -85,7 +85,7 @@ public class TestActivity extends Activity {
 		
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Details");
 		query.whereEqualTo("owner", ParseUser.getCurrentUser());
-		query.addDescendingOrder("updateAt");
+		query.addDescendingOrder("updatedAt");
 		query.setLimit(1);
 		query.findInBackground(new FindCallback<ParseObject>() {
 			
