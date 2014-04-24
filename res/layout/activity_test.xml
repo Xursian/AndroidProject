@@ -115,7 +115,7 @@
         android:text="Save Details" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtErrorMatch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/textView3"
@@ -128,8 +128,8 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView2"
-        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignBaseline="@+id/txtErrorMatch"
+        android:layout_alignBottom="@+id/txtErrorMatch"
         android:layout_centerHorizontal="true"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />

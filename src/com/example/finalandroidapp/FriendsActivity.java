@@ -7,6 +7,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.widget.ListView;
 
+//************************************************
+//Wanted to do a friends list type thing here, That lets you browse all "users" in the Database and select them to add to your listview
+// then you can search what you have common with those users, But i have not enough time :( /sadface!!!!
+//***********************************************
+
 public class FriendsActivity extends Activity {
 	
 	//public String userNames[] = {"test1","test2","test3"};
@@ -23,7 +28,7 @@ public class FriendsActivity extends Activity {
 		//	list.add(userNames[i]);
 		//}
 
-		
+
 		
 	}
 

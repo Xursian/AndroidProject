@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.GetCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -45,10 +46,21 @@ public class TestActivity extends Activity {
 		txtSongs = (TextView)findViewById(R.id.txtSongs);
 		txtActivities = (TextView)findViewById(R.id.txtActivities);
 
+	//	ParseObject obj = 
+	//			ParseObject.createWithoutData("owner", currentUser.getObjectId());
+	//	obj.saveInBackground();
+		
+	//	ParseQuery<ParseObject> innerQry = ParseQuery.getQuery("User");
+	//	innerQry.whereEqualTo("objectId", currentUser.getObjectId().toString());
+		
+		
 		
 		ParseQuery<ParseObject> qry = ParseQuery.getQuery("Details"); //table name
-		qry.include(currentUser.getObjectId()); //VERY IMPORTANT!!!! includes current users accociated rows
-		qry.orderByAscending("updatedAt"); //make sure we get the most up to date row
+		//qry.include("User"); 
+		//qry.whereEqualTo("owner", currentUser.getObjectId());
+		//qry.whereEqualTo("owner", currentUser.getObjectId());
+		qry.orderByDescending("updatedAt"); //make sure we get the most up to date row
+	//	qry.whereMatchesQuery("owner", innerQry);
 		qry.getFirstInBackground(new GetCallback<ParseObject>() {  //and ONLY one row
 
 			@Override
