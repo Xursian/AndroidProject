@@ -1,5 +1,7 @@
 package com.example.finalandroidapp;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
@@ -55,7 +58,7 @@ public class TestActivity extends Activity {
 		
 		
 		
-		ParseQuery<ParseObject> qry = ParseQuery.getQuery("Details"); //table name
+/*		ParseQuery<ParseObject> qry = ParseQuery.getQuery("Details"); //table name
 		//qry.include("User"); 
 		//qry.whereEqualTo("owner", currentUser.getObjectId());
 		//qry.whereEqualTo("owner", currentUser.getObjectId());
@@ -77,6 +80,30 @@ public class TestActivity extends Activity {
 				//	Toast.makeText(TestActivity.this, "Sorry loading detailes failed!", Toast.LENGTH_SHORT).show();
 					Log.d("TEST","ERROR LOADING DETAILS: " + arg1.toString() + currentUser.getObjectId().toString());
 				}
+			}
+		});*/
+		
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("Details");
+		query.whereEqualTo("owner", ParseUser.getCurrentUser());
+		query.addDescendingOrder("updateAt");
+		query.setLimit(1);
+		query.findInBackground(new FindCallback<ParseObject>() {
+			
+			@Override
+			public void done(List<ParseObject> arg0, ParseException arg1) {
+				// TODO Auto-generated method stub
+				if (arg1 == null) {
+					for (ParseObject detail : arg0) {
+						txtMovies.setText(detail.getString("movies"));
+						txtGames.setText(detail.getString("games"));
+						txtSongs.setText(detail.getString("songs"));
+						txtActivities.setText(detail.getString("activities"));
+						Log.d("Games",detail.getString("games"));
+					}
+				} else {
+					Log.d("Error",arg1.getMessage());
+				}
+			//	txtErr.setText(arg0(0).getString("games"));
 			}
 		});
 			

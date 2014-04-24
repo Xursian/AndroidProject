@@ -1,17 +1,13 @@
 package com.example.finalandroidapp;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -70,7 +66,7 @@ public class FriendsActivity extends Activity {
 					
 				});*/
 				
-				ParseQuery<ParseObject> qry = ParseQuery.getQuery("User"); //table name
+			/*	ParseQuery<ParseObject> qry = ParseQuery.getQuery("User"); //table name
 				qry.whereEqualTo("username", userNameToSearchFor);
 				qry.getFirstInBackground(new GetCallback<ParseObject>() {  //and ONLY one row
 
@@ -83,7 +79,9 @@ public class FriendsActivity extends Activity {
 							txtDetails.setText("No such user found");
 						}
 					}
-				});			}
+				});	*/
+				
+			}
 		});
 		
 	}
